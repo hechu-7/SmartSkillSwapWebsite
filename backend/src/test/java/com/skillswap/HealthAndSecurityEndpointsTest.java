@@ -60,4 +60,15 @@ public class HealthAndSecurityEndpointsTest {
                 .andExpect(jsonPath("$.status", is(401)))
                 .andExpect(jsonPath("$.error", is("Unauthorized")));
     }
+
+    @Test
+    @DisplayName("CORS preflight request from deployed Vercel domain is accepted")
+    void testCorsPreflightFromVercelOrigin() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options("/api/auth/register")
+                        .header("Origin", "https://smart-skill-swap-website.vercel.app")
+                        .header("Access-Control-Request-Method", "POST"))
+                .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header().string("Access-Control-Allow-Origin", "https://smart-skill-swap-website.vercel.app"));
+    }
 }
+

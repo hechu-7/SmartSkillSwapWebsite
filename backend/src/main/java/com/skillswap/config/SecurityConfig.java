@@ -33,7 +33,8 @@ import java.util.stream.Collectors;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String DEPLOYED_FRONTEND_ORIGIN = "https://skillswap-ten-topaz.vercel.app";
+    private static final String DEPLOYED_FRONTEND_ORIGIN = "https://smart-skill-swap-website.vercel.app";
+    private static final String LEGACY_FRONTEND_ORIGIN = "https://skillswap-ten-topaz.vercel.app";
 
     private final CustomUserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -73,6 +74,9 @@ public class SecurityConfig {
                 .collect(Collectors.toCollection(java.util.ArrayList::new));
         if (!origins.contains(DEPLOYED_FRONTEND_ORIGIN)) {
             origins.add(DEPLOYED_FRONTEND_ORIGIN);
+        }
+        if (!origins.contains(LEGACY_FRONTEND_ORIGIN)) {
+            origins.add(LEGACY_FRONTEND_ORIGIN);
         }
         configuration.setAllowedOrigins(origins);
         configuration.setAllowedOriginPatterns(List.of(
