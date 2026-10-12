@@ -1,0 +1,28 @@
+# Environment files (Never commit real secrets)
+.env
+backend/.env
+frontend/.env.local
+
+# Maven & Build artifacts
+target/
+**/target/
+*.class
+
+# Node & Frontend
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vite/
+**/vite.log
+
+# IntelliJ IDEA & Editors
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
