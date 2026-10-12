@@ -1,8 +1,8 @@
 import { Client } from '@stomp/stompjs';
 
-// Convert HTTP URL to WebSocket protocol (ws:// or wss://)
-const RAW_URL = import.meta.env.VITE_WS_BASE_URL || 'http://localhost:8080/ws';
-const BROKER_URL = RAW_URL.replace(/^http:/, 'ws:').replace(/^https:/, 'wss:');
+const RAW_URL = (import.meta.env.VITE_WS_BASE_URL || 'http://localhost:8080/ws').trim().replace(/\/+$/, '');
+const CLEAN_URL = RAW_URL.endsWith('/ws') ? RAW_URL : `${RAW_URL}/ws`;
+const BROKER_URL = CLEAN_URL.replace(/^http:/, 'ws:').replace(/^https:/, 'wss:');
 
 class WebSocketService {
   constructor() {
